@@ -1,10 +1,9 @@
 TicTacToe-Python
 ================
 
-Simple text-based Tic Tac Toe game in Python, to learn the programming language. Example run below:
+Simple text-based, human vs human, Tic Tac Toe game in Python, to learn the programming language. Example run below:
 
-
->python tic_tac_toe.py
+>$ python tic_tac_toe.py
 
      ********************************************
                     TIC TAC TOE MENU
