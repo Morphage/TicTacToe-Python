@@ -5,6 +5,7 @@ Simple text-based Tic Tac Toe game in Python, to learn the programming language.
 
 
 >python tic_tac_toe.py
+
      ********************************************
                     TIC TAC TOE MENU
      ********************************************
