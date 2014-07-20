@@ -52,27 +52,29 @@ class Board(object):
 		print ""
 		
 	def make_move(self, row, col, seed):
-		r = ord(row) - ord('a')
-		c = int(col) - 1	
-		self.board[r][c] = seed
+		self.board[row][col] = seed
 		
-	def is_cell_empty(self, row, col):
-		r = ord(row) - ord('a')
-		c = int(col) - 1	
-		return self.board[r][c] == Board.EMPTY
+	def is_cell_empty(self, row, col):	
+		return self.board[row][col] == Board.EMPTY
 		
-	def check_for_win(self, row, col, seed):
-		r = ord(row) - ord('a')
-		c = int(col) - 1
-	
-		if self.board[r][0] == seed and self.board[r][1] == seed and self.board[r][2] == seed:
+	def check_for_win(self, row, col, seed):	
+		""" Check the row where the move was played """
+		if self.board[row][0] == seed and self.board[row][1] == seed and self.board[row][2] == seed:
 			return True
-		if self.board[0][c] == seed and self.board[1][c] == seed and self.board[2][c] == seed:
+		
+		""" Check the column where the move was played """
+		if self.board[0][col] == seed and self.board[1][col] == seed and self.board[2][col] == seed:
 			return True
-		if self.board[0][0] == seed and self.board[1][1] == seed and self.board[2][2] == seed:
-			return True
-		if self.board[0][2] == seed and self.board[1][1] == seed and self.board[2][0] == seed:
-			return True
+		
+		""" Check if move was made on the diagonal """
+		if row == col:
+			if self.board[0][0] == seed and self.board[1][1] == seed and self.board[2][2] == seed:
+				return True
+		
+		""" Check if move was made on the anti diagonal """
+		if row + col == 2:
+			if self.board[0][2] == seed and self.board[1][1] == seed and self.board[2][0] == seed:
+				return True
 		
 		return False
 		
@@ -93,7 +95,7 @@ class Board(object):
 			return False
 		if int(move[1]) > 3 or int(move[1]) < 1:
 			return False
-		if not self.is_cell_empty(move[0], move[1]):
+		if not self.is_cell_empty(ord(move[0]) - ord('a'), int(move[1]) - 1):
 			return False
 			
 		return True

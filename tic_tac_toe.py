@@ -13,6 +13,7 @@ def print_menu():
 def main():
 	ttt_board = Board()
 	turn = Board.CIRCLE
+	move_number = 0
 	
 	print_menu()
 	ttt_board.print_board()
@@ -25,19 +26,23 @@ def main():
 		
 		if move == 'exit':
 			return
+			
+		row = ord(move[0]) - ord('a')
+		col = int(move[1]) - 1
 		
-		ttt_board.make_move(move[0], move[1], turn)
+		ttt_board.make_move(row, col, turn)
 		ttt_board.print_board()
 		
-		if ttt_board.check_for_win(move[0], move[1], turn):
+		if ttt_board.check_for_win(row, col, turn):
 			print "     Player %d has won! Congratulations!" % turn
 			return
+		else:
+			if move_number == (Board.N ** 2 - 1):
+				print "     The game ended in a draw!"
+				return
 		
-		if ttt_board.check_draw():
-			print "     The game ended in a draw!"
-			return
-		
-		turn = Board.CROSS if turn == Board.CIRCLE else Board.CIRCLE		
+		turn = Board.CROSS if turn == Board.CIRCLE else Board.CIRCLE
+		move_number += 1
 		
 if __name__ == '__main__':
 	main()
